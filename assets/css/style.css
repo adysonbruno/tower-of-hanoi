@@ -1,4 +1,20 @@
-div{
-    height: 200px;
-    width: 40px;
+h1{
+    text-align: center;
+}
+
+div#main{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    margin:0 auto;
+}
+
+div.towers{
+    height: 300px;
+    width: 25px;
+    background-color: black;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
 }
