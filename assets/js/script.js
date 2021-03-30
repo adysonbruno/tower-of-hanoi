@@ -71,11 +71,15 @@ const createDisc = () => {
 
 createDisc();
 
+let movesCount = 0;
+let moves = document.getElementById("movescount");
+let h2Jogada = document.getElementById("jogada");
+
 const eventClickTower = () => {
     let selected = false;
     let discSelected = "";
     let towers = document.querySelectorAll(".towers");
-    let h2Jogada = document.getElementById("jogada");
+
 
     towers.forEach((current) => {
         current.addEventListener("click", (event) => {
@@ -83,29 +87,31 @@ const eventClickTower = () => {
             let lastDisc = tower.lastElementChild;
 
             if (selected === false) {
-                discSelected = lastDisc;
-                selected = true;
-                h2Jogada.innerText = "Para onde quer mover?";
-            } else if (
-            (selected === true)
-            &&
-            (lastDisc === null || lastDisc.clientWidth > discSelected.clientWidth)
-            ) {
-                tower.appendChild(discSelected);
-                selected = false;
-                h2Jogada.innerText = "Escolha um disco para mover:";
-            }else if (
-                (selected === true)
-                &&
-                (lastDisc.clientWidth === discSelected.clientWidth)
-            ){
-                alert("Por favor, selecione o disco que quer mover e para onde quer movê-lo!")
-                selected = false;
-                h2Jogada.innerText = "Escolha um disco para mover:";
-            }else {
-                alert("Não é possivel colocar um disco maior sobre um menor!");
-                selected = false;
+                if(lastDisc===null){
+                    alert("Por favor escolha uma torre que possui disco!");
+                    h2Jogada.innerText = "Escolha um disco para mover:";
+                }else{
+                    discSelected = lastDisc;
+                    selected = true;
+                    h2Jogada.innerText = "Para onde quer mover?";
+                }
+            } else if (selected === true){
+                if(lastDisc === null || lastDisc.clientWidth > discSelected.clientWidth){
+                    tower.appendChild(discSelected);
+                    selected = false;
+                    h2Jogada.innerText = "Escolha um disco para mover:";
+                    movesCount+=1;
+                    moves.innerText = `Moves: ${movesCount}`;
+                }else if (lastDisc.clientWidth === discSelected.clientWidth){
+                    alert("Por favor, selecione o disco que quer mover e para onde quer movê-lo!")
+                    selected = false;
+                    h2Jogada.innerText = "Escolha um disco para mover:";
+                }else {
+                    alert("Não é possivel colocar um disco maior sobre um menor!");
+                    selected = false;
+                }
             }
+
             if (endTower.childElementCount === 4) {
                 alert("Parabéns você venceu!!");
                 h2Jogada.innerText="Parabéns você venceu!!";
@@ -113,6 +119,7 @@ const eventClickTower = () => {
         });
     });
 };
+
 eventClickTower();
 
 let button = document.getElementById("reset");
@@ -120,5 +127,8 @@ button.addEventListener("click",()=>{
     startTower.innerHTML = ""
     offsetTower.innerHTML = ""
     endTower.innerHTML = "";
+    h2Jogada.innerText = "Escolha um disco para mover:";
+    movesCount = 0;
+    moves.innerText = `Moves: ${movesCount}`;
     createDisc();
 })
