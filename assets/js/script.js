@@ -71,13 +71,14 @@ const createDisc = () => {
 
 createDisc();
 
+let selected = false;
+let discSelected = "";
 let movesCount = 0;
 let moves = document.getElementById("movescount");
 let h2Jogada = document.getElementById("jogada");
 
 const eventClickTower = () => {
-    let selected = false;
-    let discSelected = "";
+
     let towers = document.querySelectorAll(".towers");
 
 
@@ -127,6 +128,8 @@ button.addEventListener("click",()=>{
     startTower.innerHTML = ""
     offsetTower.innerHTML = ""
     endTower.innerHTML = "";
+    selected = false;
+    discSelected = "";
     h2Jogada.innerText = "Escolha um disco para mover:";
     movesCount = 0;
     moves.innerText = `Moves: ${movesCount}`;
