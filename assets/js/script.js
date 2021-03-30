@@ -57,22 +57,22 @@ const eventClickTower = () => {
   startTower.addEventListener("click", (event) => {
     let tower = event.currentTarget;
     let lastDisc = tower.lastElementChild;
-    console.log(lastDisc.clientWidth);
+
     if (selected === false) {
       discSelected = lastDisc;
       selected = true;
-    } else if (selected === true && lastDisc === null) {
-      tower.appendChild(discSelected);
-      selected = false;
     } else if (
       selected === true &&
-      lastDisc.clientWidth > discSelected.clientWidth
+      (lastDisc === null || lastDisc.clientWidth > discSelected.clientWidth)
     ) {
       tower.appendChild(discSelected);
       selected = false;
+    } else {
+      alert("Não é possivel colocar um bloco maior sobre um menor");
+      selected = false;
     }
 
-    console.log(lastDisc.clientWidth < discSelected.clientWidth);
+    console.log(selected);
   });
 
   offsetTower.addEventListener("click", (event) => {
@@ -81,14 +81,14 @@ const eventClickTower = () => {
     if (selected === false) {
       discSelected = lastDisc;
       selected = true;
-    } else if (selected === true && lastDisc === null) {
-      tower.appendChild(discSelected);
-      selected = false;
     } else if (
       selected === true &&
-      lastDisc.clientWidth > discSelected.clientWidth
+      (lastDisc === null || lastDisc.clientWidth > discSelected.clientWidth)
     ) {
       tower.appendChild(discSelected);
+      selected = false;
+    } else {
+      alert("Não é possivel colocar um bloco maior sobre um menor");
       selected = false;
     }
     console.log(selected);
@@ -100,16 +100,20 @@ const eventClickTower = () => {
     if (selected === false) {
       discSelected = lastDisc;
       selected = true;
-    } else if (selected === true && lastDisc === null) {
-      tower.appendChild(discSelected);
-      selected = false;
     } else if (
       selected === true &&
-      lastDisc.clientWidth > discSelected.clientWidth
+      (lastDisc === null || lastDisc.clientWidth > discSelected.clientWidth)
     ) {
       tower.appendChild(discSelected);
       selected = false;
+    } else {
+      alert("Não é possivel colocar um bloco maior sobre um menor");
+      selected = false;
     }
+    if (tower.childElementCount === 4) {
+      alert("venceu");
+    }
+    console.log(selected);
   });
 };
 eventClickTower();
