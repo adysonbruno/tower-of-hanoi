@@ -57,6 +57,7 @@ const eventClickTower = () => {
   startTower.addEventListener("click", (event) => {
     let tower = event.currentTarget;
     let lastDisc = tower.lastElementChild;
+    console.log(lastDisc.clientWidth);
     if (selected === false) {
       discSelected = lastDisc;
       selected = true;
@@ -71,7 +72,7 @@ const eventClickTower = () => {
       selected = false;
     }
 
-    console.log(selected);
+    console.log(lastDisc.clientWidth < discSelected.clientWidth);
   });
 
   offsetTower.addEventListener("click", (event) => {
